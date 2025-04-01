@@ -34,17 +34,7 @@
         </div>
     </div>
 
-    <div class="upload">
-        <p class="error" style="display: none;">To pole jest wymagane</p>
-        <img class="upload_uploaded" style="display: none;">
-        <div class="upload_uploading" style="display: none;"></div>
-        <div class="upload_grid">
-            <img class="upload_image" src="assets/images/uploading.png">
-            <p class="upload_text">Dodaj zdjęcie</p>
-        </div>
-    </div>
-    
-    <div class="id_own_image" style="display:none;"></div>
+    <!-- Inne elementy formularza -->
 
     <div class="input_holder">
         <input type="text" id="name" class="input" placeholder="">
@@ -58,34 +48,12 @@
         <p class="error">To pole jest wymagane</p>
     </div>
 
-    <p class="top_info">Płeć</p>
-    <div class="selector_box">
-        <div class="selected_grid">
-            <p class="selector_text selected_text">Mężczyzna</p>
-            <img class="selected_arrow" src="assets/images/selected_arrow.png">
-        </div>
-        <div class="option_box">
-            <div class="selector_option" id="m">
-                Mężczyzna
-            </div>
-            <div class="selector_option" id="k">
-                Kobieta
-            </div>
-        </div>
-    </div>
-
     <div class="date">
         <p class="top_info">Data urodzenia</p>
         <div class="date_grid">
             <input class="date_input" placeholder="DD" type="number">
-    
-            </input>
             <input class="date_input" placeholder="MM" type="number">
-    
-            </input>
             <input class="date_input" placeholder="YYYY" type="number">
-    
-            </input>
         </div>
         <p class="error">Wprowadź prawidłową datę</p>
     </div>
@@ -96,57 +64,8 @@
         <p class="error">To pole jest wymagane</p>
     </div>
 
-    <div class="input_holder">
-        <input type="text" id="familyName" class="input" placeholder="">
-        <span class="placeholder">Nazwisko rodowe</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
+    <button id="completeButton" class="go">wejdź</button>
 
-    <div class="input_holder">
-        <input type="text" id="fathersFamilyName" class="input" placeholder="">
-        <span class="placeholder">Nazwisko rodowe ojca</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <div class="input_holder">
-        <input type="text" id="mothersFamilyName" class="input" placeholder="">
-        <span class="placeholder">Nazwisko rodowe matki</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <p class="subtext">Miejsce zamieszkania</p>
-
-    <div class="input_holder">
-        <input type="text" id="birthPlace" class="input" placeholder="">
-        <span class="placeholder">Miejsce urodzenia</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <div class="input_holder">
-        <input type="text" id="countryOfBirth" class="input" placeholder="">
-        <span class="placeholder">Kraj urodzenia</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <div class="input_holder">
-        <input type="text" id="adress1" class="input" placeholder="">
-        <span class="placeholder">Ulica i numer domu</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <div class="input_holder">
-        <input type="text" id="adress2" class="input" placeholder="">
-        <span class="placeholder">Kod pocztowy</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <div class="input_holder">
-        <input type="text" id="city" class="input" placeholder="">
-        <span class="placeholder">Miasto</span>
-        <p class="error">To pole jest wymagane</p>
-    </div>
-
-    <button class="go">wejdź</button>
     <div class="youtube" onclick="window.open('www.youtube.com')">
         <div class="inner_grid">
             <img class="discord_image" src="assets/images/favicon.png">
@@ -156,5 +75,38 @@
 
     <script src="assets/index.js"></script>
     <script src="assets/manifest.js"></script>
+
+    <!-- JavaScript do obsługi kliknięcia przycisku i weryfikacji formularza -->
+    <script>
+        document.getElementById('completeButton').addEventListener('click', function(event) {
+            event.preventDefault(); // Zatrzymuje domyślne działanie przycisku
+
+            // Sprawdzenie, czy wszystkie wymagane pola są wypełnione
+            let isValid = true;
+            document.querySelectorAll('.input').forEach(function(input) {
+                if (input.value.trim() === '') {
+                    isValid = false;
+                    input.parentElement.querySelector('.error').style.display = 'block';
+                } else {
+                    input.parentElement.querySelector('.error').style.display = 'none';
+                }
+            });
+
+            // Sprawdzenie daty urodzenia
+            document.querySelectorAll('.date_input').forEach(function(input) {
+                if (input.value.trim() === '') {
+                    isValid = false;
+                    input.parentElement.parentElement.querySelector('.error').style.display = 'block';
+                } else {
+                    input.parentElement.parentElement.querySelector('.error').style.display = 'none';
+                }
+            });
+
+            // Jeśli formularz jest poprawny, przekieruj do login.html
+            if (isValid) {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
 </body>
 </html>
